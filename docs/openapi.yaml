@@ -1,0 +1,527 @@
+openapi: 3.0.3
+info:
+  title: RiskOps API
+  version: 1.0.0
+  description: Triagem assistida de ocorrências operacionais. Dados sintéticos; decisão
+    humana.
+paths:
+  /api/dashboard:
+    get:
+      operationId: dashboard_retrieve
+      tags:
+      - dashboard
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/evaluation:
+    get:
+      operationId: evaluation_retrieve
+      tags:
+      - evaluation
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/export:
+    get:
+      operationId: export_retrieve
+      tags:
+      - export
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            text/csv:
+              schema:
+                type: string
+          description: ''
+  /api/incidents:
+    get:
+      operationId: incidents_list
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+      - in: query
+        name: offset
+        schema:
+          type: integer
+      - in: query
+        name: open
+        schema:
+          type: boolean
+      - in: query
+        name: priority
+        schema:
+          type: string
+      - in: query
+        name: q
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: string
+      tags:
+      - incidents
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentListOutput'
+          description: ''
+    post:
+      operationId: incidents_create
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IncidentInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IncidentInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentOutput'
+          description: ''
+  /api/incidents/{incident_id}:
+    get:
+      operationId: incidents_retrieve
+      parameters:
+      - in: path
+        name: incident_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - incidents
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetailOutput'
+          description: ''
+  /api/incidents/{incident_id}/reanalyze:
+    post:
+      operationId: incidents_reanalyze_create
+      parameters:
+      - in: path
+        name: incident_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReanalysisInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReanalysisInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReanalysisInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentOutput'
+          description: ''
+  /api/incidents/{incident_id}/review:
+    post:
+      operationId: incidents_review_create
+      parameters:
+      - in: path
+        name: incident_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentOutput'
+          description: ''
+  /api/incidents/{incident_id}/status:
+    post:
+      operationId: incidents_status_create
+      parameters:
+      - in: path
+        name: incident_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StatusInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StatusInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentOutput'
+          description: ''
+  /api/integrations:
+    get:
+      operationId: integrations_retrieve
+      tags:
+      - integrations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/policies:
+    get:
+      operationId: policies_retrieve
+      tags:
+      - policies
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    AnalysisStatusEnum:
+      enum:
+      - pending
+      - completed
+      - failed
+      type: string
+      description: |-
+        * `pending` - Análise pendente
+        * `completed` - Análise concluída
+        * `failed` - Análise indisponível
+    BlankEnum:
+      enum:
+      - ''
+    IncidentDetailOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 160
+        report:
+          type: string
+          maxLength: 6000
+        location:
+          type: string
+          maxLength: 160
+        reporter:
+          type: string
+          maxLength: 100
+        category:
+          type: string
+          maxLength: 40
+        priority:
+          $ref: '#/components/schemas/PriorityEnum'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        analysis: {}
+        analysis_status:
+          $ref: '#/components/schemas/AnalysisStatusEnum'
+        analysis_error:
+          type: string
+          maxLength: 500
+        reviewed_priority:
+          oneOf:
+          - $ref: '#/components/schemas/PriorityEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        assigned_to:
+          type: string
+          maxLength: 100
+        version:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        is_synthetic:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        audit:
+          type: array
+          items: {}
+        audit_valid:
+          type: boolean
+        alerts:
+          type: array
+          items: {}
+      required:
+      - alerts
+      - audit
+      - audit_valid
+      - created_at
+      - id
+      - location
+      - report
+      - title
+      - updated_at
+    IncidentInput:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 160
+          minLength: 5
+        report:
+          type: string
+          maxLength: 6000
+          minLength: 20
+        location:
+          type: string
+          maxLength: 160
+          minLength: 2
+        reporter:
+          type: string
+          default: ''
+          maxLength: 100
+        is_synthetic:
+          type: boolean
+          default: true
+      required:
+      - location
+      - report
+      - title
+    IncidentListOutput:
+      type: object
+      properties:
+        count:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncidentOutput'
+        next_offset:
+          type: integer
+          nullable: true
+      required:
+      - count
+      - next_offset
+      - results
+    IncidentOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 160
+        report:
+          type: string
+          maxLength: 6000
+        location:
+          type: string
+          maxLength: 160
+        reporter:
+          type: string
+          maxLength: 100
+        category:
+          type: string
+          maxLength: 40
+        priority:
+          $ref: '#/components/schemas/PriorityEnum'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        analysis: {}
+        analysis_status:
+          $ref: '#/components/schemas/AnalysisStatusEnum'
+        analysis_error:
+          type: string
+          maxLength: 500
+        reviewed_priority:
+          oneOf:
+          - $ref: '#/components/schemas/PriorityEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        assigned_to:
+          type: string
+          maxLength: 100
+        version:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        is_synthetic:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - location
+      - report
+      - title
+      - updated_at
+    PriorityEnum:
+      enum:
+      - P1
+      - P2
+      - P3
+      - P4
+      type: string
+      description: |-
+        * `P1` - Urgente
+        * `P2` - Alta
+        * `P3` - Moderada
+        * `P4` - Rotina
+    ReanalysisInput:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+      required:
+      - expected_version
+    ReviewInput:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        priority:
+          $ref: '#/components/schemas/PriorityEnum'
+        reason:
+          type: string
+          maxLength: 2000
+          minLength: 12
+        assigned_to:
+          type: string
+          maxLength: 100
+          minLength: 2
+      required:
+      - assigned_to
+      - expected_version
+      - priority
+      - reason
+    StatusEnum:
+      enum:
+      - pending
+      - in_review
+      - resolved
+      type: string
+      description: |-
+        * `pending` - Aguardando revisão
+        * `in_review` - Em atendimento
+        * `resolved` - Concluída
+    StatusInput:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        reason:
+          type: string
+          maxLength: 2000
+          minLength: 12
+      required:
+      - expected_version
+      - reason
+      - status
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

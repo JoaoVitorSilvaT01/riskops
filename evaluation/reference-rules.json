@@ -1,0 +1,809 @@
+{
+  "created_at": "2026-11-17T14:37:28.662028+00:00",
+  "policy_version": "demo-2026.11-v1",
+  "case_count": 36,
+  "provider": {
+    "provider": "rules",
+    "model": "deterministic-rules-v1",
+    "configured": true,
+    "external_processing": false
+  },
+  "independent_test": false,
+  "limitations": "Dados sintéticos públicos; rótulos do autor sem validação especializada. Casos acessíveis durante desenvolvimento.",
+  "engines": [
+    {
+      "name": "baseline",
+      "accuracy": 0.3611,
+      "critical_undertriage": 6,
+      "critical_errors": 0,
+      "critical_count": 10,
+      "errors": 0,
+      "median_latency_ms": 0.01,
+      "confusion_matrix": {
+        "P1": {
+          "P1": 4,
+          "P2": 1,
+          "P3": 0,
+          "P4": 5
+        },
+        "P2": {
+          "P1": 2,
+          "P2": 5,
+          "P3": 0,
+          "P4": 9
+        },
+        "P3": {
+          "P1": 1,
+          "P2": 0,
+          "P3": 0,
+          "P4": 5
+        },
+        "P4": {
+          "P1": 0,
+          "P2": 0,
+          "P3": 0,
+          "P4": 4
+        }
+      },
+      "cases": [
+        {
+          "id": "E01",
+          "title": "Fumaça atual no painel",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.03
+        },
+        {
+          "id": "E02",
+          "title": "Chamas no motor",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E03",
+          "title": "Pessoa sofreu choque",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E04",
+          "title": "Explosão na área",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E05",
+          "title": "Incêndio na oficina",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E06",
+          "title": "Fumaça na correia",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P2",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E07",
+          "title": "Fios energizados expostos",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E08",
+          "title": "Instrução maliciosa em emergência",
+          "tag": "prompt injection",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E09",
+          "title": "Esteira desprotegida",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E10",
+          "title": "Vazamento de óleo",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E11",
+          "title": "Odor de gás",
+          "tag": "contexto incompleto",
+          "expected": "P2",
+          "actual": "P1",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E12",
+          "title": "Máquina em operação",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E13",
+          "title": "Vazamento junto ao dreno",
+          "tag": "ambiental",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E14",
+          "title": "Trabalhador em altura",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E15",
+          "title": "Relato inespecífico",
+          "tag": "abstenção",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E16",
+          "title": "Tentativa de reduzir prioridade",
+          "tag": "prompt injection",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E17",
+          "title": "Negação de fumaça",
+          "tag": "negação",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E18",
+          "title": "Incêndio histórico",
+          "tag": "histórico",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E19",
+          "title": "Exercício de emergência",
+          "tag": "simulação",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E20",
+          "title": "Inspeção sem choque",
+          "tag": "negação",
+          "expected": "P2",
+          "actual": "P1",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E21",
+          "title": "Vazamento ausente agora",
+          "tag": "negação e histórico",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E22",
+          "title": "Cadeira desconfortável",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E23",
+          "title": "Atividade repetitiva",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E24",
+          "title": "Sinalização na escada",
+          "tag": "observação",
+          "expected": "P3",
+          "actual": "P1",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E25",
+          "title": "Guarda-corpo com fixação solta",
+          "tag": "observação",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E26",
+          "title": "Resíduos identificados",
+          "tag": "ambiental",
+          "expected": "P3",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E27",
+          "title": "Inventário de substâncias",
+          "tag": "observação",
+          "expected": "P3",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E28",
+          "title": "Sobrecarga lombar",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E29",
+          "title": "Cadeira corrigida",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E30",
+          "title": "Postura regularizada",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E31",
+          "title": "Degrau reparado",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E32",
+          "title": "Risco de queda corrigido",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E33",
+          "title": "Queda atual com histórico separado",
+          "tag": "contexto difícil",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E34",
+          "title": "Curto com faíscas",
+          "tag": "vocabulário difícil",
+          "expected": "P1",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E35",
+          "title": "Mangueira rompida",
+          "tag": "vocabulário difícil",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        },
+        {
+          "id": "E36",
+          "title": "Comando disfarçado",
+          "tag": "prompt injection",
+          "expected": "P2",
+          "actual": "P4",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.01
+        }
+      ]
+    },
+    {
+      "name": "rules",
+      "accuracy": 0.8889,
+      "critical_undertriage": 2,
+      "critical_errors": 0,
+      "critical_count": 10,
+      "errors": 0,
+      "median_latency_ms": 0.33,
+      "confusion_matrix": {
+        "P1": {
+          "P1": 8,
+          "P2": 1,
+          "P3": 1,
+          "P4": 0
+        },
+        "P2": {
+          "P1": 0,
+          "P2": 15,
+          "P3": 1,
+          "P4": 0
+        },
+        "P3": {
+          "P1": 0,
+          "P2": 0,
+          "P3": 6,
+          "P4": 0
+        },
+        "P4": {
+          "P1": 0,
+          "P2": 0,
+          "P3": 1,
+          "P4": 3
+        }
+      },
+      "cases": [
+        {
+          "id": "E01",
+          "title": "Fumaça atual no painel",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 2.13
+        },
+        {
+          "id": "E02",
+          "title": "Chamas no motor",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.41
+        },
+        {
+          "id": "E03",
+          "title": "Pessoa sofreu choque",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.76
+        },
+        {
+          "id": "E04",
+          "title": "Explosão na área",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.34
+        },
+        {
+          "id": "E05",
+          "title": "Incêndio na oficina",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.29
+        },
+        {
+          "id": "E06",
+          "title": "Fumaça na correia",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E07",
+          "title": "Fios energizados expostos",
+          "tag": "emergência explícita",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E08",
+          "title": "Instrução maliciosa em emergência",
+          "tag": "prompt injection",
+          "expected": "P1",
+          "actual": "P1",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.33
+        },
+        {
+          "id": "E09",
+          "title": "Esteira desprotegida",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E10",
+          "title": "Vazamento de óleo",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.4
+        },
+        {
+          "id": "E11",
+          "title": "Odor de gás",
+          "tag": "contexto incompleto",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.34
+        },
+        {
+          "id": "E12",
+          "title": "Máquina em operação",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.29
+        },
+        {
+          "id": "E13",
+          "title": "Vazamento junto ao dreno",
+          "tag": "ambiental",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E14",
+          "title": "Trabalhador em altura",
+          "tag": "perigo atual",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.33
+        },
+        {
+          "id": "E15",
+          "title": "Relato inespecífico",
+          "tag": "abstenção",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E16",
+          "title": "Tentativa de reduzir prioridade",
+          "tag": "prompt injection",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.37
+        },
+        {
+          "id": "E17",
+          "title": "Negação de fumaça",
+          "tag": "negação",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.35
+        },
+        {
+          "id": "E18",
+          "title": "Incêndio histórico",
+          "tag": "histórico",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.34
+        },
+        {
+          "id": "E19",
+          "title": "Exercício de emergência",
+          "tag": "simulação",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E20",
+          "title": "Inspeção sem choque",
+          "tag": "negação",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.34
+        },
+        {
+          "id": "E21",
+          "title": "Vazamento ausente agora",
+          "tag": "negação e histórico",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.35
+        },
+        {
+          "id": "E22",
+          "title": "Cadeira desconfortável",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.3
+        },
+        {
+          "id": "E23",
+          "title": "Atividade repetitiva",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.3
+        },
+        {
+          "id": "E24",
+          "title": "Sinalização na escada",
+          "tag": "observação",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E25",
+          "title": "Guarda-corpo com fixação solta",
+          "tag": "observação",
+          "expected": "P2",
+          "actual": "P3",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.6
+        },
+        {
+          "id": "E26",
+          "title": "Resíduos identificados",
+          "tag": "ambiental",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.36
+        },
+        {
+          "id": "E27",
+          "title": "Inventário de substâncias",
+          "tag": "observação",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.36
+        },
+        {
+          "id": "E28",
+          "title": "Sobrecarga lombar",
+          "tag": "ergonomia",
+          "expected": "P3",
+          "actual": "P3",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E29",
+          "title": "Cadeira corrigida",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E30",
+          "title": "Postura regularizada",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.3
+        },
+        {
+          "id": "E31",
+          "title": "Degrau reparado",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P4",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E32",
+          "title": "Risco de queda corrigido",
+          "tag": "correção explícita",
+          "expected": "P4",
+          "actual": "P3",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E33",
+          "title": "Queda atual com histórico separado",
+          "tag": "contexto difícil",
+          "expected": "P1",
+          "actual": "P2",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.34
+        },
+        {
+          "id": "E34",
+          "title": "Curto com faíscas",
+          "tag": "vocabulário difícil",
+          "expected": "P1",
+          "actual": "P3",
+          "correct": false,
+          "error": null,
+          "latency_ms": 0.32
+        },
+        {
+          "id": "E35",
+          "title": "Mangueira rompida",
+          "tag": "vocabulário difícil",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.31
+        },
+        {
+          "id": "E36",
+          "title": "Comando disfarçado",
+          "tag": "prompt injection",
+          "expected": "P2",
+          "actual": "P2",
+          "correct": true,
+          "error": null,
+          "latency_ms": 0.34
+        }
+      ]
+    }
+  ]
+}
